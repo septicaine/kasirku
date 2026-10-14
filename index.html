@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - Evergreen</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f2f4f2;
+            color: #1f2937;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigasi Kiri */
+        aside {
+            width: 240px;
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 16px;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar-top {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #111827;
+            padding-left: 8px;
+        }
+
+        .brand-icon {
+            width: 26px;
+            height: 26px;
+            background-color: #1e4d3b;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4b5563;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+
+        .nav-item.active {
+            background-color: #e8f3ee;
+            color: #1e4d3b;
+            font-weight: 600;
+        }
+
+        /* Profil Pengguna di Bawah Sidebar */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-top: 16px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #1e4d3b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .user-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+            line-height: 1.2;
+        }
+
+        .user-info p {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        /* Area Konten Utama */
+        main {
+            margin-left: 240px;
+            flex-grow: 1;
+            padding: 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 2px;
+        }
+
+        .header-title p {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .date-badge {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        /* Grid Kartu Statistik Utama */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .stat-card .label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .stat-card .value {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .stat-card .trend {
+            font-size: 11px;
+            color: #166534;
+            font-weight: 500;
+        }
+
+        .stat-card .trend.sub {
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        /* Layout Grid Tengah & Bawah */
+        .content-row {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 16px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .legend {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            color: #4b5563;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        /* Bar Chart Bulanan */
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 160px;
+            padding-top: 10px;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 100%;
+        }
+
+        .bar-dark {
+            width: 8px;
+            background-color: #1e4d3b;
+            border-radius: 3px;
+        }
+
+        .bar-light {
+            width: 8px;
+            background-color: #d1fae5;
+            border-radius: 3px;
+        }
+
+        .bar-label {
+            font-size: 10px;
+            color: #9ca3af;
+        }
+
+        /* Komposisi Modal */
+        .modal-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .modal-item h5 {
+            font-size: 12px;
+            font-weight: 500;
+            color: #4b5563;
+        }
+
+        .modal-item p {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .progress-bg {
+            height: 6px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #1e4d3b;
+            border-radius: 10px;
+        }
+
+        /* List Ringkasan Stok */
+        .stock-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stock-item {
+            font-size: 12px;
+        }
+
+        .stock-item strong {
+            display: block;
+            color: #111827;
+            font-size: 13px;
+        }
+
+        .stock-item .count {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 1px 8px;
+            border-radius: 12px;
+            margin-top: 3px;
+        }
+
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .badge-success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        /* List Aktivitas Terbaru */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #e8f3ee;
+            color: #1e4d3b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .activity-details h5 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .activity-details p {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigasi -->
+    <aside>
+        <div class="sidebar-top">
+            <div class="brand-logo">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <span>Evergreen</span>
+            </div>
+
+            <div class="nav-menu">
+                <a href="index.html" class="nav-item active">
+                    <i class="fa-solid fa-house"></i> Beranda
+                </a>
+                <a href="stok.html" class="nav-item">
+                    <i class="fa-solid fa-boxes-stacked"></i> Stok
+                </a>
+                <a href="kasir.html" class="nav-item">
+                    <i class="fa-solid fa-cart-shopping"></i> Kasir
+                </a>
+            </div>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-avatar">AR</div>
+            <div class="user-info">
+                <h4>Ayu Rahma</h4>
+                <p>Toko Evergreen</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Konten Utama Beranda -->
+    <main>
+        <div class="main-header">
+            <div class="header-title">
+                <h1>Beranda</h1>
+                <p>Ringkasan performa Toko Evergreen • September 2026</p>
+            </div>
+            <div class="date-badge">
+                <i class="fa-regular fa-calendar"></i> September 2026
+            </div>
+        </div>
+
+        <!-- Kartu Statistik Utama -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="label">Penjualan Bulan Ini</span>
+                <div class="value">Rp48.750.000</div>
+                <span class="trend">+12,4%</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Modal Terpakai</span>
+                <div class="value">Rp27.300.000</div>
+                <span class="trend sub">56% dari penjualan</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Laba Bersih</span>
+                <div class="value">Rp14.625.000</div>
+                <span class="trend">+8,7%</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Total Stok</span>
+                <div class="value">1.248 barang</div>
+                <span class="trend sub">32 stok menipis</span>
+            </div>
+        </div>
+
+        <!-- Baris Kedua: Grafik Laporan & Komposisi Modal -->
+        <div class="content-row">
+            <div class="card">
+                <div class="card-header-flex">
+                    <div class="card-title">Laporan Bulanan</div>
+                    <div class="legend">
+                        <div class="legend-item"><div class="dot" style="background:#1e4d3b;"></div> Penjualan</div>
+                        <div class="legend-item"><div class="dot" style="background:#d1fae5;"></div> Laba</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:60px;"></div><div class="bar-light" style="height:35px;"></div></div><span class="bar-label">1</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:80px;"></div><div class="bar-light" style="height:45px;"></div></div><span class="bar-label">2</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:70px;"></div><div class="bar-light" style="height:40px;"></div></div><span class="bar-label">3</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:90px;"></div><div class="bar-light" style="height:50px;"></div></div><span class="bar-label">4</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:75px;"></div><div class="bar-light" style="height:40px;"></div></div><span class="bar-label">5</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:100px;"></div><div class="bar-light" style="height:60px;"></div></div><span class="bar-label">6</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:110px;"></div><div class="bar-light" style="height:65px;"></div></div><span class="bar-label">7</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:95px;"></div><div class="bar-light" style="height:55px;"></div></div><span class="bar-label">8</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:120px;"></div><div class="bar-light" style="height:70px;"></div></div><span class="bar-label">9</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:125px;"></div><div class="bar-light" style="height:75px;"></div></div><span class="bar-label">10</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:115px;"></div><div class="bar-light" style="height:65px;"></div></div><span class="bar-label">11</span></div>
+                    <div class="bar-group"><div class="bars"><div class="bar-dark" style="height:130px;"></div><div class="bar-light" style="height:80px;"></div></div><span class="bar-label">12</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title" style="margin-bottom: 16px;">Komposisi Modal</div>
+                <div class="modal-list">
+                    <div class="modal-item">
+                        <h5>Pembelian stok</h5>
+                        <p>Rp18.750.000</p>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 70%;"></div></div>
+                    </div>
+                    <div class="modal-item">
+                        <h5>Operasional</h5>
+                        <p>Rp5.450.000</p>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 25%;"></div></div>
+                    </div>
+                    <div class="modal-item">
+                        <h5>Pemasaran</h5>
+                        <p>Rp3.100.000</p>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 15%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Baris Ketiga: Ringkasan Stok & Aktivitas Terbaru -->
+        <div class="content-row">
+            <div class="card">
+                <div class="card-title" style="margin-bottom: 16px;">Ringkasan Stok</div>
+                <div class="stock-list">
+                    <div class="stock-item">
+                        <strong>Kopi Arabika 250g</strong>
+                        <span class="count">18 unit</span><br>
+                        <span class="badge badge-warning">Menipis</span>
+                    </div>
+                    <div class="stock-item">
+                        <strong>Susu Oat 1L</strong>
+                        <span class="count">9 unit</span><br>
+                        <span class="badge badge-warning">Menipis</span>
+                    </div>
+                    <div class="stock-item">
+                        <strong>Gula Aren 500g</strong>
+                        <span class="count">64 unit</span><br>
+                        <span class="badge badge-success">Aman</span>
+                    </div>
+                    <div class="stock-item">
+                        <strong>Teh Melati Premium</strong>
+                        <span class="count">82 unit</span><br>
+                        <span class="badge badge-success">Aman</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title" style="margin-bottom: 16px;">Aktivitas Terbaru</div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fa-solid fa-receipt"></i></div>
+                        <div class="activity-details">
+                            <h5>Penjualan #TRX-1048</h5>
+                            <p>Rp385.000 • 10.42</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fa-solid fa-box"></i></div>
+                        <div class="activity-details">
+                            <h5>Stok masuk Kopi Arabika</h5>
+                            <p>40 unit • 09.18</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fa-solid fa-receipt"></i></div>
+                        <div class="activity-details">
+                            <h5>Penjualan #TRX-1047</h5>
+                            <p>Rp128.500 • 08.56</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
