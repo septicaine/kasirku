@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buat Akun - Evergreen</title>
+    <title>Evergreen</title>
     <!-- Google Fonts: Inter / Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- FontAwesome untuk Ikon -->
@@ -202,6 +202,28 @@
             background-color: #f9fafb;
         }
 
+        .btn-google {
+            width: 100%;
+            background-color: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .btn-google:hover {
+            background-color: #f9fafb;
+            border-color: #9ca3af;
+        }
+
         /* Tautan Masuk */
         .login-link {
             text-align: center;
@@ -226,6 +248,7 @@
             font-size: 12px;
             color: #9ca3af;
         }
+
     </style>
 </head>
 <body>
@@ -256,22 +279,26 @@
 
                 <div class="form-group">
                     <label for="email">Alamat email</label>
-                    <input type="email" id="email" placeholder="nama@perusahaan.com">
+                    <input type="email" id="email" placeholder="nama@gmail.com">
                 </div>
 
                 <div class="form-group">
                     <label for="sandi">Kata sandi</label>
                     <div class="input-container">
-                        <input type="password" id="sandi" value="rahasia123">
-                        <i class="fa-regular fa-eye-slash password-toggle"></i>
+                        <!-- value "rahasia123" dihapus supaya kosong, dan tambahkan id unik -->
+                        <input type="password" id="sandi" placeholder="Masukkan kata sandi">
+                        <!-- Tambahkan id pada ikon mata -->
+                        <i class="fa-regular fa-eye-slash password-toggle" id="toggleSandi"></i>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="konfirmasi-sandi">Konfirmasi kata sandi</label>
                     <div class="input-container">
-                        <input type="password" id="konfirmasi-sandi" value="rahasia123">
-                        <i class="fa-regular fa-eye-slash password-toggle"></i>
+                        <!-- value "rahasia123" dihapus, dan tambahkan id unik -->
+                        <input type="password" id="konfirmasi-sandi" placeholder="Ulangi kata sandi">
+                        <!-- Tambahkan id pada ikon mata -->
+                        <i class="fa-regular fa-eye-slash password-toggle" id="toggleKonfirmasiSandi"></i>
                     </div>
                 </div>
 
@@ -282,12 +309,19 @@
                 <span>atau</span>
             </div>
 
+            <!-- Tombol Daftar dengan Google -->
             <button type="button" class="btn-google">
-                <i class="fa-solid fa-xmark" style="font-size: 12px; border: 1px solid #d1d5db; border-radius: 50%; padding: 3px;"></i> Daftar dengan Google
+                <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.64 9.2c0-.63-.05-1.25-.15-1.84H9v3.49h4.84c-.21 1.12-.86 2.07-1.83 2.71v2.26h2.96c1.73-1.59 2.73-3.93 2.73-6.62z" fill="#4285F4"/>
+                    <path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.96-2.26c-.82.55-1.87.9-3 .9-2.31 0-4.27-1.56-4.97-3.65H1.01v2.33C2.51 15.96 5.54 18 9 18z" fill="#34A853"/>
+                    <path d="M4.03 10.81c-.18-.55-.28-1.13-.28-1.71s.1-1.16.28-1.71V5.06H1.01C.37 6.35 0 7.8 0 9.3s.37 2.95 1.01 4.24l3.02-2.73z" fill="#FBBC05"/>
+                    <path d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0 5.54 0 2.51 2.04 1.01 5.06l3.02 2.33c.7-2.09 2.66-3.81 4.97-3.81z" fill="#EA4335"/>
+                </svg>
+                Daftar dengan Google
             </button>
 
             <div class="login-link">
-                Sudah punya akun? <a href="#">Masuk</a>
+                Sudah punya akun? <a href="login.html">Masuk</a>
             </div>
         </div>
     </main>
@@ -297,5 +331,27 @@
         <p>Dengan melanjutkan, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.</p>
     </footer>
 
+    <script>
+        // Toggle visibility for password fields
+        const toggleSandi = document.getElementById('toggleSandi');
+        const sandiInput = document.getElementById('sandi');
+
+        toggleSandi.addEventListener('click', () => {
+            const type = sandiInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            sandiInput.setAttribute('type', type);
+            toggleSandi.classList.toggle('fa-eye');
+            toggleSandi.classList.toggle('fa-eye-slash');
+        });
+
+        const toggleKonfirmasiSandi = document.getElementById('toggleKonfirmasiSandi');
+        const konfirmasiSandiInput = document.getElementById('konfirmasi-sandi');
+
+        toggleKonfirmasiSandi.addEventListener('click', () => {
+            const type = konfirmasiSandiInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            konfirmasiSandiInput.setAttribute('type', type);
+            toggleKonfirmasiSandi.classList.toggle('fa-eye');
+            toggleKonfirmasiSandi.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
 </html>
