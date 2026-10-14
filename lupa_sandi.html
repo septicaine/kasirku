@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evergreen</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1f2937;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between;
+            padding: 24px 40px;
+        }
+
+        /* Bagian Header Logo */
+        header {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #111827;
+        }
+
+        .brand-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #1e4d3b;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        /* Konten Utama / Form Card */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 20px 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 440px;
+            padding: 36px 32px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            margin-bottom: 24px;
+        }
+
+        .card-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            color: #1f2937;
+        }
+
+        .form-group input:focus {
+            border-color: #1e4d3b;
+            box-shadow: 0 0 0 3px rgba(30, 77, 59, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Tombol Kirim Tautan */
+        .btn-submit {
+            width: 100%;
+            background-color: #1e4d3b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #15382b;
+        }
+
+        /* Kotak Informasi Tambahan */
+        .info-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #166534;
+            line-height: 1.4;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Tautan Kembali ke Login */
+        .back-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+        }
+
+        .back-link a {
+            color: #1e4d3b;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Bawah */
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Logo -->
+    <header>
+        <div class="brand-logo">
+            <div class="brand-icon">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+            <span>Evergreen</span>
+        </div>
+    </header>
+
+    <!-- Konten Form Lupa Kata Sandi -->
+    <main>
+        <div class="card">
+            <div class="card-header">
+                <h1>Lupa Kata Sandi</h1>
+                <p>Masukkan email terdaftar. Kami akan mengirim tautan untuk mengatur ulang kata sandi Anda.</p>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="email">Alamat email</label>
+                    <input type="email" id="email" placeholder="nama@gmail.com" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Kirim Tautan Reset</button>
+            </form>
+
+            <div class="info-box">
+                <strong>Periksa kotak masuk Anda</strong>
+                Tautan berlaku selama 30 menit. Periksa folder spam jika email belum terlihat.
+            </div>
+
+            <div class="back-link">
+                <a href="login.html"><i class="fa-solid fa-arrow-left"></i> Kembali ke halaman masuk</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Bawah -->
+    <footer>
+        <p>Dengan melanjutkan, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.</p>
+    </footer>
+
+</body>
+</html>
