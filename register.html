@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Akun - Evergreen</title>
+    <!-- Google Fonts: Inter / Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1f2937;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between;
+            padding: 24px 40px;
+        }
+
+        /* Bagian Header Logo */
+        header {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #111827;
+        }
+
+        .brand-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #1e4d3b; /* Warna hijau tua khas Evergreen */
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        /* Konten Utama / Form Card */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 20px 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 440px;
+            padding: 36px 32px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            margin-bottom: 24px;
+        }
+
+        .card-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            color: #1f2937;
+        }
+
+        .form-group input:focus {
+            border-color: #1e4d3b;
+            box-shadow: 0 0 0 3px rgba(30, 77, 59, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Ikon mata untuk password */
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Tombol Daftar Utama */
+        .btn-submit {
+            width: 100%;
+            background-color: #1e4d3b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-submit:hover {
+            background-color: #15382b;
+        }
+
+        /* Pemisah "ATAU" */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .divider span {
+            padding: 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tombol Daftar dengan Google */
+        .btn-google {
+            width: 100%;
+            background-color: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 11px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-google:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Tautan Masuk */
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .login-link a {
+            color: #1e4d3b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Bagian Footer Bawah */
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Logo -->
+    <header>
+        <div class="brand-logo">
+            <div class="brand-icon">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+            <span>Evergreen</span>
+        </div>
+    </header>
+
+    <!-- Konten Form Buat Akun -->
+    <main>
+        <div class="card">
+            <div class="card-header">
+                <h1>Buat Akun</h1>
+                <p>Mulai kelola bisnis Anda dengan lebih rapi.</p>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="nama">Nama lengkap</label>
+                    <input type="text" id="nama" placeholder="Ayu Rahma">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Alamat email</label>
+                    <input type="email" id="email" placeholder="nama@perusahaan.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="sandi">Kata sandi</label>
+                    <div class="input-container">
+                        <input type="password" id="sandi" value="rahasia123">
+                        <i class="fa-regular fa-eye-slash password-toggle"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="konfirmasi-sandi">Konfirmasi kata sandi</label>
+                    <div class="input-container">
+                        <input type="password" id="konfirmasi-sandi" value="rahasia123">
+                        <i class="fa-regular fa-eye-slash password-toggle"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Daftar</button>
+            </form>
+
+            <div class="divider">
+                <span>atau</span>
+            </div>
+
+            <button type="button" class="btn-google">
+                <i class="fa-solid fa-xmark" style="font-size: 12px; border: 1px solid #d1d5db; border-radius: 50%; padding: 3px;"></i> Daftar dengan Google
+            </button>
+
+            <div class="login-link">
+                Sudah punya akun? <a href="#">Masuk</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Bawah -->
+    <footer>
+        <p>Dengan melanjutkan, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.</p>
+    </footer>
+
+</body>
+</html>
