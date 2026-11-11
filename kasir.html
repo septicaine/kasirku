@@ -469,12 +469,18 @@
             </div>
         </div>
 
-        <div class="user-profile">
-            <div class="user-avatar">AR</div>
-            <div class="user-info">
-                <h4>Ayu Rahma</h4>
-                <p>Toko Evergreen</p>
+        <div class="user-profile" style="display: flex; align-items: center; justify-content: space-between; padding: 15px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="user-avatar">AR</div>
+                <div class="user-info">
+                    <h4 style="font-size: 14px; margin: 0;">Ayu Rahma</h4>
+                    <p style="font-size: 12px; color: #6b7280; margin: 0;">Toko Evergreen</p>
+                </div>
             </div>
+            <!-- Tombol Keluar / Logout -->
+            <a href="#" onclick="logoutApp()" title="Keluar" style="color: #9ca3af; text-decoration: none; font-size: 16px;">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
         </div>
     </aside>
 
@@ -494,9 +500,12 @@
 
             <div class="category-filters">
                 <button class="cat-btn active">Semua</button>
+                <button class="cat-btn">Makanan</button>
                 <button class="cat-btn">Minuman</button>
-                <button class="cat-btn">Bahan baku</button>
-                <button class="cat-btn">Merchandise</button>
+                <button class="cat-btn">Snack</button>
+                <button class="cat-btn">Sembako</button>
+                <button class="cat-btn">Kebutuhan Rumah</button>
+                <button class="cat-btn">Lainnya</button>
             </div>
 
             <div class="product-grid">
@@ -657,6 +666,20 @@
             </div>
         </div>
     </main>
+
+    <script>
+        // 1. Satpam Halaman (Cek Login)
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            alert('Silakan masuk terlebih dahulu!');
+            window.location.href = 'login.html';
+        }
+
+        // 2. Fungsi Tombol Keluar
+        function logoutApp() {
+            localStorage.removeItem('isLoggedIn'); // Hapus status login
+            window.location.href = 'login.html'; // Lempar balik ke login
+        }
+    </script>
 
 </body>
 </html>
