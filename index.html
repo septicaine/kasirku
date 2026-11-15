@@ -435,12 +435,18 @@
             </div>
         </div>
 
-        <div class="user-profile">
-            <div class="user-avatar">AR</div>
-            <div class="user-info">
-                <h4>Ayu Rahma</h4>
-                <p>Toko Evergreen</p>
+        <div class="user-profile" style="display: flex; align-items: center; justify-content: space-between; padding: 15px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="user-avatar">AR</div>
+                <div class="user-info">
+                    <h4 style="font-size: 14px; margin: 0;">Ayu Rahma</h4>
+                    <p style="font-size: 12px; color: #6b7280; margin: 0;">Toko Evergreen</p>
+                </div>
             </div>
+            <!-- Tombol Keluar / Logout -->
+            <a href="#" onclick="logoutApp()" title="Keluar" style="color: #9ca3af; text-decoration: none; font-size: 16px;">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
         </div>
     </aside>
 
@@ -449,10 +455,12 @@
         <div class="main-header">
             <div class="header-title">
                 <h1>Beranda</h1>
-                <p>Ringkasan performa Toko Evergreen • September 2026</p>
+                <p>Ringkasan performa Toko Evergreen • <span id="currentMonthYear">September 2026</span></p>
             </div>
-            <div class="date-badge">
-                <i class="fa-regular fa-calendar"></i> September 2026
+            <div class="date-badge" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-regular fa-calendar"></i>
+                <!-- Kita pakai input date transparan tapi dipoles biar rapi -->
+                <input type="date" id="pickerTanggal" style="border: none; background: transparent; font-family: 'Poppins', sans-serif; font-size: 12px; color: #374151; outline: none; cursor: pointer;">
             </div>
         </div>
 
@@ -584,6 +592,44 @@
             </div>
         </div>
     </main>
+
+    <script>
+        // Cek status login
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            alert('Silakan masuk atau daftar terlebih dahulu!');
+            window.location.href = 'login.html';
+        }
+
+        const dateInput = document.getElementById('pickerTanggal');
+        const monthYearSpan = document.getElementById('currentMonthYear');
+
+        // Fungsi khusus untuk mengubah format tanggal JS ke format Indonesia (contoh: 06 November 2026)
+        function formatTanggalIndo(dateString) {
+            const dateObj = new Date(dateString);
+            const options = { day: '2-digit', month: 'long', year: 'numeric' };
+            return dateObj.toLocaleDateString('id-ID', options);
+        }
+
+        if (dateInput) {
+            // 1. Set tanggal hari ini (Otomatis November 2026 saat pertama kali buka)
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+
+            // 2. Tampilkan langsung format "06 November 2026" di subtitle header
+            if (monthYearSpan) {
+                monthYearSpan.textContent = formatTanggalIndo(today);
+            }
+
+            // 3. Pas pengguna milih tanggal lain di kalender, subtitle-nya ikut berubah live!
+            dateInput.addEventListener('change', function() {
+                const selectedDate = this.value;
+
+                if (monthYearSpan && selectedDate) {
+                    monthYearSpan.textContent = formatTanggalIndo(selectedDate);
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
