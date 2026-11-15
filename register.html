@@ -332,25 +332,29 @@
     </footer>
 
     <script>
-        // Toggle visibility for password fields
-        const toggleSandi = document.getElementById('toggleSandi');
-        const sandiInput = document.getElementById('sandi');
+        // Kode bawaan untuk lihat/sembunyikan sandi (kalau ada)
+        
+        const registerForm = document.querySelector('form');
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah form reload halaman
 
-        toggleSandi.addEventListener('click', () => {
-            const type = sandiInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            sandiInput.setAttribute('type', type);
-            toggleSandi.classList.toggle('fa-eye');
-            toggleSandi.classList.toggle('fa-eye-slash');
-        });
+            const nama = document.getElementById('nama').value;
+            const email = document.getElementById('email').value;
+            const sandi = document.getElementById('sandi').value;
+            const konfirmasiSandi = document.getElementById('konfirmasi-sandi').value;
 
-        const toggleKonfirmasiSandi = document.getElementById('toggleKonfirmasiSandi');
-        const konfirmasiSandiInput = document.getElementById('konfirmasi-sandi');
+            if (sandi !== konfirmasiSandi) {
+                alert('Kata sandi dan konfirmasi sandi tidak cocok!');
+                return;
+            }
 
-        toggleKonfirmasiSandi.addEventListener('click', () => {
-            const type = konfirmasiSandiInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            konfirmasiSandiInput.setAttribute('type', type);
-            toggleKonfirmasiSandi.classList.toggle('fa-eye');
-            toggleKonfirmasiSandi.classList.toggle('fa-eye-slash');
+            // Simpan data akun ke memori browser (localStorage)
+            const userData = { nama: nama, email: email, sandi: sandi };
+            localStorage.setItem('evergreen_user', JSON.stringify(userData));
+            localStorage.setItem('isLoggedIn', 'true');
+
+            alert('Pendaftaran berhasil! Selamat datang di Evergreen.');
+            window.location.href = 'index.html'; // Lempar ke halaman utama
         });
     </script>
 </body>
